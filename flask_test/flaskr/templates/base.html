@@ -1,0 +1,25 @@
+<!--base layout for all pages, g is automatically available in the templates -->
+<!doctype html>
+<title>{% block title %}{% endblock %} - Flaskr</title> <!--block title is overwritten in otehr templates-->
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<nav>
+  <h1>Flaskr</h1>
+  <ul>
+    {% if g.user %} <!-- g.user is set if someone is logged in-->
+      <li><span>{{ g.user['username'] }}</span>
+      <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
+    {% else %}
+      <li><a href="{{ url_for('auth.register') }}">Register</a>
+      <li><a href="{{ url_for('auth.login') }}">Log In</a>
+    {% endif %}
+  </ul>
+</nav>
+<section class="content">
+  <header>
+    {% block header %}{% endblock %}<!--block header is overwritten in other templates-->
+  </header>
+  {% for message in get_flashed_messages() %} <!-- shows flashed messages, such as error messages-->
+    <div class="flash">{{ message }}</div>
+  {% endfor %}
+  {% block content %}{% endblock %}<!--block content is overwritten in other templates-->
+</section> 

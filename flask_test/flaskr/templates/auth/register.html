@@ -1,0 +1,16 @@
+<!--for the register page-->
+{% extends 'base.html' %} <!-- replaces the blocks in the base template-->
+
+{% block header %}
+  <h1>{% block title %}Register{% endblock %}</h1> <!--block title here, allows the title and header to share the same content without having to write it twice-->
+{% endblock %}
+
+{% block content %}
+  <form method="post">
+    <label for="username">Username</label>
+    <input name="username" id="username" required> <!--the required tag means that the form cannot be submitted without these fields being filled-->
+    <label for="password">Password</label>
+    <input type="password" name="password" id="password" required>
+    <input type="submit" value="Register">
+  </form>
+{% endblock %}
